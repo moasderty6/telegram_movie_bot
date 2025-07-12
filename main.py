@@ -26,7 +26,7 @@ async def send_movie(message: types.Message):
         torrent_url = movie["torrents"][0]["url"]
         quality = movie["torrents"][0]["quality"]
 
-        try:
+try:
     await message.reply(f"🎬 {title} ({quality})")
     await message.reply("⬇️ جاري التحميل...")
 
