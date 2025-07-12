@@ -27,19 +27,19 @@ async def send_movie(message: types.Message):
         quality = movie["torrents"][0]["quality"]
 
         await message.reply(f"🎬 {title} ({quality})")
-⬇️ جاري التحميل...")
+await message.reply("⬇️ جاري التحميل...")
 
-        subprocess.run(["aria2c", torrent_url, "-d", "downloads"], check=True)
+subprocess.run(["aria2c", torrent_url, "-d", "downloads"], check=True)
 
-        for file in os.listdir("downloads"):
-            if file.endswith(".mp4") or file.endswith(".mkv"):
-                video_path = os.path.join("downloads", file)
-                with open(video_path, 'rb') as video:
-                    await bot.send_video(message.chat.id, video, caption=f"🎬 {title} ({quality})")
-                os.remove(video_path)
-                break
-        else:
-            await message.reply("⚠️ لم أجد ملف فيديو داخل التورنت.")
+for file in os.listdir("downloads"):
+    if file.endswith(".mp4") or file.endswith(".mkv"):
+        video_path = os.path.join("downloads", file)
+        with open(video_path, 'rb') as video:
+            await bot.send_video(message.chat.id, video, caption=f"🎬 {title} ({quality})")
+        os.remove(video_path)
+        break
+else:
+    await message.reply("⚠️ لم أجد ملف فيديو داخل التورنت.")
 
     except Exception as e:
         await message.reply("❌ حدث خطأ أثناء التحميل أو الرفع.")
