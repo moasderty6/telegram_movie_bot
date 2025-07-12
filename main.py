@@ -26,7 +26,7 @@ async def send_movie(message: types.Message):
         torrent_url = movie["torrents"][0]["url"]
         quality = movie["torrents"][0]["quality"]
 
-        await message.reply(f"🎬 {title} ({quality})
+        await message.reply(f"🎬 {title} ({quality})")
 ⬇️ جاري التحميل...")
 
         subprocess.run(["aria2c", torrent_url, "-d", "downloads"], check=True)
